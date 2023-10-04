@@ -1,0 +1,13 @@
+<%= form_with model: task do |form| %>
+  <div>
+    <%= form.label :title %><br />
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :content %><br />
+    <%= form.text_field :content %>
+  </div>
+
+  <div><%= form.submit %></div>
+<% end %>
