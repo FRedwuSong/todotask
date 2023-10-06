@@ -15,20 +15,26 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    if @task.save
-      redirect_to tasks_path, notice: 'Task created successfully'
-    else
-      render :new
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit; end
 
   def update
-    if @task.update(task_params)
-      redirect_to tasks_path, notice: 'Updated task successfully'
-    else
-      render :edit
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to tasks_path, notice: 'Task was successfully edied.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
