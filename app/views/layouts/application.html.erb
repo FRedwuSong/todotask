@@ -18,7 +18,10 @@
           <%= content_tag :div, msg, class: "alert alert-info" %>
         <% end %>
       </div>
-
+      <div>
+        <%= link_to "繁體中文", :controller => controller_name, :action => action_name, :locale => "zh" %><br/>
+        <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+      </div>
       <%= yield %>
 
     </main>

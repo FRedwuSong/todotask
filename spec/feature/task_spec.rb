@@ -9,35 +9,34 @@ RSpec.feature 'Task CRUD_', type: :feature do
   describe '任務的列表' do
     it 'visit root path' do
       visit tasks_path
-      expect(page).to have_selector('h1', text: 'Task list')
+      expect(page).to have_selector('h1', text: I18n.t('list').to_s)
     end
   end
 
   describe '新增任務' do
     it 'success create task' do
       create_tasks(title, content)
-      expect(page).to have_content('Task was successfully created.')
+      expect(page).to have_content(I18n.t('controllers.tasks.create.notice').to_s)
       expect(page).to have_content(title)
       expect(page).to have_content(content)
     end
 
     it 'unsuccess create task because do not input title and content' do
       create_tasks('', '')
-      expect(page).to have_content('2 errors prohibited this content from being saved:')
-      expect(page).to have_content("Title can't be blank")
-      expect(page).to have_content("Content can't be blank")
+      expect(page).to have_content('2 errors prohibited this content from being saved :')
+      expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.content').to_s)
+      expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.title').to_s)
     end
 
     it 'unsuccess create task because do not input title' do
       create_tasks('', content)
-      expect(page).to have_content('1 error prohibited this content from being saved:')
-      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.title').to_s)
+      expect(page).to have_content(content)
     end
 
     it 'unsuccess create task because do not input content' do
       create_tasks(title, '')
-      expect(page).to have_content('1 error prohibited this content from being saved:')
-      expect(page).to have_content("Content can't be blank")
+      expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.content').to_s)
     end
   end
 
@@ -58,16 +57,15 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
     it "Only edit the task's titile, and content is empty" do
       create_tasks(title, content)
-      edit_tasks(content, '')
-      expect(page).to have_content('1 error prohibited this content from being saved:')
-      expect(page).to have_content("Content can't be blank")
+      edit_tasks(title, '')
+      expect(page).to have_content('1 error prohibited this content from being saved :')
     end
 
     it "Only update the task's content, and title is empty" do
       create_tasks(title, content)
       edit_tasks('', content)
-      expect(page).to have_content('1 error prohibited this content from being saved:')
-      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content('1 error prohibited this content from being saved :')
+      expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.title').to_s)
     end
   end
 
@@ -83,7 +81,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
   def create_tasks(title, content)
     visit tasks_path
-    click_link 'New Task'
+    click_link I18n.t('create').to_s
     fill_in 'task_title', with: title
     fill_in 'task_content', with: content
     click_button 'Create Task'

@@ -1,7 +1,7 @@
 <%= form_with model: task do |form| %>
 <% if task.errors.any? %>
     <div>
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this content from being saved:</h2>
+      <h2><%= pluralize(task.errors.count, "#{I18n.t('forms.error')}") %> <%= I18n.t('forms.prohibited_saved') %></h2>
 
       <ul>
         <% task.errors.each do |error| %>

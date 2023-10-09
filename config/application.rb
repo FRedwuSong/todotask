@@ -29,9 +29,13 @@ module Todotask
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
+    # set Taiwanese time_zone
+    config.time_zone = 'Taipei'
+    config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.available_locales = %i[en zh]
+    config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     # Don't generate system test files.
     config.generators.system_tests = nil
