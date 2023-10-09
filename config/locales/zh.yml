@@ -1,0 +1,37 @@
+zh:
+  list: "任務列表"
+  create: "新增任務"
+  title: "任務標題"
+  content: "任務內容"
+  edit: "編輯任務"
+  delete: "刪除任務"
+  delete_confirm: "要確定喔！！！"
+  forms:
+    error: "錯誤"
+    prohibited_saved: "導致儲存失敗:"
+    submit: "完成"
+  activerecord:
+    attributes:
+      task:
+        title: "任務標題"
+        content: "任務內容"
+    errors:
+      models:
+        task:
+          attributes:
+            content:
+              blank: "任務內容需要填寫喔"
+            title:
+              blank: "任務標題需要填寫喔"
+  controllers:
+    tasks:
+      create:
+        notice: "任務新增成功！～～"
+      update:
+        notice: "任務內容更新成功！～～"
+      destroy:
+        notice: "任務刪除成功！～～"
+  helpers:
+    submit:
+      create: "建立任務"
+      update: "編輯任務"

@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: I18n.t('controllers.tasks.create.notice') }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully edied.' }
+        format.html { redirect_to tasks_path, notice: I18n.t('controllers.tasks.update.notice') }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task&.destroy
-    redirect_to tasks_path, notice: 'Task deleted successfully'
+    redirect_to tasks_path, notice: I18n.t('controllers.tasks.destroy.notice')
   end
 
   private

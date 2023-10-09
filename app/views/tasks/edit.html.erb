@@ -1,10 +1,10 @@
 <div>
-  <h1>Edit task</h1>
+  <h1><%= t('edit') %></h1>
 
   <section>
     <%= render 'tasks/shared/form', task: @task %>
     <div>
-      <%= link_to 'Task list', tasks_path %>
+      <%= link_to t('list'), tasks_path %>
     </div>
   </section>
 </div>
