@@ -77,6 +77,58 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
   end
 
+  describe 'sorting tasks' do
+    it 'Use ASC order, and it have the right order' do
+      tasks = []
+      5.times do |id|
+        task = create(:task, title: "task#{id}", content: '1')
+        tasks << task
+      end
+
+      visit tasks_path
+
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[0][:title]}/
+        )
+      end
+      within('form.form_sort_asc_desc') do
+        select I18n.t('sort_by_created_at_asc').to_s, from: 'created_at'
+        click_on I18n.t('sort_submit').to_s
+      end
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[0][:title]}/
+        )
+      end
+    end
+
+    it 'Use DESC order' do
+      tasks = []
+      5.times do |id|
+        task = create(:task, title: "task#{id}", content: '1')
+        tasks << task
+      end
+
+      visit tasks_path
+
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[0][:title]}/
+        )
+      end
+      within('form.form_sort_asc_desc') do
+        select I18n.t('sort_by_created_at_desc').to_s, from: 'created_at'
+        click_on I18n.t('sort_submit').to_s
+      end
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[4][:title]}/
+        )
+      end
+    end
+  end
+
   private
 
   def create_tasks(title, content)

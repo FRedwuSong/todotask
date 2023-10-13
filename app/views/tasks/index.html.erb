@@ -1,17 +1,29 @@
 <div>
   <h1><%= t('list') %></h1>
-
   <section>
-    <p><%= link_to t('create'), new_task_path %></p> <br />
-      <% @tasks.each do |task| %>
-        <div class="">
+    <p><%= link_to t('create'), new_task_path %></p><br />
+    <div class="tasks_content">
+      <%= form_tag({ controller: "tasks", action: "index" }, method: "get", class: 'form_sort_asc_desc') do |form| %>
+        <label for="created_at"><%= "#{t('created_at')}" %></label>
+        <select name="created_at" id="created_at">
+          <option value="default"><%= "#{t('default')}" %></option>
+          <option value="asc"><%= "#{t('sort_by_created_at_asc')}" %></option>
+          <option value="desc"><%= "#{t('sort_by_created_at_desc')}" %></option>
+        </select>
+        <%= submit_tag "#{t('sort_submit')}"%>
+      <% end %>
+      <div class="tasks">
+        <% @tasks.each do |task| %>
+        <div class="task<%= task.id %>">
           <p><%= "#{t('title')}" %> : <%= task.title %></p><br />
-          <p><%= "#{t('content')}" %>: <%= task.content %></p><br />
+          <p><%= "#{t('content')}" %> : <%= task.content %></p><br />
           <div>
             <%= link_to t('edit'), edit_task_path(locale: 'en', id: task.id) %>
             <%= link_to t('delete'), task_path(locale: 'en', id:task.id), data: {turbo_method: :delete, turbo_confirm: I18n.t("delete_confirm")}%>
           </div>
         </div>
-      <% end  %>
+      <% end %>
+      </div>
+    </div>
   </section>
 </div>

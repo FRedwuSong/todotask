@@ -5,6 +5,11 @@ en:
   content: "Task's content"
   edit: "Edit Task"
   delete: "Delete Task"
+  created_at: "created_at_sort"
+  default: "default"
+  sort_by_created_at_asc: "asc"
+  sort_by_created_at_desc: "desc"
+  sort_submit: "Submit"
   delete_confirm: "Are you sure you want to delete this task?"
   forms:
     error: "error"

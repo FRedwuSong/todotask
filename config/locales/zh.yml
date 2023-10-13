@@ -5,11 +5,17 @@ zh:
   content: "任務內容"
   edit: "編輯任務"
   delete: "刪除任務"
+  created_at: "依新增日期排序"
+  default: "預設值"
+  sort_by_created_at_asc: "升冪"
+  sort_by_created_at_desc: "降冪"
+  sort_submit: "Submit"
   delete_confirm: "要確定喔！！！"
   forms:
     error: "錯誤"
     prohibited_saved: "導致儲存失敗:"
     submit: "完成"
+
   activerecord:
     attributes:
       task:
