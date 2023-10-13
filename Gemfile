@@ -57,7 +57,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'factory_bot_rails'
+  gem 'faker', '~> 3.2', '>= 3.2.1'
   gem 'guard-rspec'
   gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
 end
@@ -74,3 +75,9 @@ group :development do
 end
 
 gem 'byebug', '~> 11.1'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "sentry-ruby", "~> 5.12"
+
+gem "sentry-rails", "~> 5.12"
