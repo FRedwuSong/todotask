@@ -20,6 +20,7 @@ en:
       task:
         title: "Task's title"
         content: "Task's content"
+        end_time: "Task's ending time"
     errors:
       models:
         task:

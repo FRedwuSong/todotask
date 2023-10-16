@@ -17,12 +17,13 @@
         <div class="task<%= task.id %>">
           <p><%= "#{t('title')}" %> : <%= task.title %></p><br />
           <p><%= "#{t('content')}" %> : <%= task.content %></p><br />
+          <p><%= "#{t('activerecord.attributes.task.end_time')}" %> : <%= task.end_time.strftime("%d %b, %Y, %H:%M") %></p><br />
           <div>
             <%= link_to t('edit'), edit_task_path(locale: 'en', id: task.id) %>
             <%= link_to t('delete'), task_path(locale: 'en', id:task.id), data: {turbo_method: :delete, turbo_confirm: I18n.t("delete_confirm")}%>
           </div>
         </div>
-      <% end %>
+        <% end %>
       </div>
     </div>
   </section>
