@@ -9,7 +9,14 @@ class TasksController < ApplicationController
              when 'desc'
                Task.sort_by_created_at_desc
              else
-               Task.all
+               case params[:end_time]
+               when 'asc'
+                 Task.sort_by_created_at_asc
+               when 'desc'
+                 Task.sort_by_created_at_desc
+               else
+                 Task.all
+               end
              end
   end
 
@@ -53,7 +60,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :end_time)
   end
 
   def find_task
