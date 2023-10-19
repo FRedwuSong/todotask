@@ -3,21 +3,21 @@
 class TasksController < ApplicationController
   before_action :find_task, only: %i[show edit update destroy]
   def index
-    @tasks = case params[:created_at]
-             when 'asc'
-               Task.sort_by_created_at_asc
-             when 'desc'
-               Task.sort_by_created_at_desc
-             else
-               case params[:end_time]
-               when 'asc'
-                 Task.sort_by_created_at_asc
-               when 'desc'
-                 Task.sort_by_created_at_desc
-               else
-                 Task.all
-               end
-             end
+    sort_methods = {
+      'created_at_asc' => :sort_by_created_at_asc,
+      'created_at_desc' => :sort_by_created_at_desc,
+      'end_time_asc' => :sort_by_end_time_asc,
+      'end_time_desc' => :sort_by_end_time_desc
+    }
+
+    sort_method = if params[:created_at]
+                    sort_methods["created_at_#{params[:created_at]}"]
+                  elsif params[:end_time]
+                    sort_methods["end_time_#{params[:end_time]}"]
+                  else
+                    :all
+                  end
+    @tasks = Task.send(sort_method)
   end
 
   def show; end
