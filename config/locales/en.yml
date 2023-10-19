@@ -6,9 +6,12 @@ en:
   edit: "Edit Task"
   delete: "Delete Task"
   created_at: "created_at_sort"
+  end_time: "end_time_sort"
   default: "default"
   sort_by_created_at_asc: "asc"
   sort_by_created_at_desc: "desc"
+  sort_by_end_time_asc: "asc"
+  sort_by_end_time_desc: "desc"
   sort_submit: "Submit"
   delete_confirm: "Are you sure you want to delete this task?"
   forms:
@@ -27,6 +30,7 @@ en:
           attributes:
             title: "Task's title can't be blank"
             content: "Task's content can't be blank"
+            end_time: "Task's ending time can't be blank"
   controllers:
     tasks:
       create:

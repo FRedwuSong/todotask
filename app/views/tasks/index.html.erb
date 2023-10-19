@@ -3,14 +3,16 @@
   <section>
     <p><%= link_to t('create'), new_task_path %></p><br />
     <div class="tasks_content">
-      <%= form_tag({ controller: "tasks", action: "index" }, method: "get", class: 'form_sort_asc_desc') do |form| %>
-        <label for="created_at"><%= "#{t('created_at')}" %></label>
-        <select name="created_at" id="created_at">
-          <option value="default"><%= "#{t('default')}" %></option>
-          <option value="asc"><%= "#{t('sort_by_created_at_asc')}" %></option>
-          <option value="desc"><%= "#{t('sort_by_created_at_desc')}" %></option>
-        </select>
-        <%= submit_tag "#{t('sort_submit')}"%>
+      <% ["created_at", "end_time"].each do |field| %>
+        <%= form_tag({ controller: "tasks", action: "index" }, method: "get", class: "form_#{field}_sort_asc_desc") do |form| %>
+          <label for="<%= field %>"><%= t(field) %></label>
+          <select name="<%= field %>" id="<%= field %>">
+            <option value="default"><%= t('default') %></option>
+            <option value="asc"><%= t("sort_by_#{field}_asc") %></option>
+            <option value="desc"><%= t("sort_by_#{field}_desc") %></option>
+          </select>
+        <%= submit_tag t('sort_submit') %>
+        <% end %>
       <% end %>
       <div class="tasks">
         <% @tasks.each do |task| %>
