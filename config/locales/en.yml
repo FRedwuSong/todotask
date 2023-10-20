@@ -24,6 +24,7 @@ en:
         title: "Task's title"
         content: "Task's content"
         end_time: "Task's ending time"
+        state: "state"
     errors:
       models:
         task:
@@ -43,3 +44,8 @@ en:
     submit:
       create: "Create Task"
       update: "Update Task"
+  aasm:
+    states:
+      pending: "pending"
+      processing: "process"
+      complete: "completed"
