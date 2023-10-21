@@ -27,4 +27,8 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :end_time, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title]
+  end
 end

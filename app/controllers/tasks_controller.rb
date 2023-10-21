@@ -5,8 +5,10 @@ class TasksController < ApplicationController
   def index
     sort_methods = {
       'created_at_asc' => :sort_by_created_at_asc,
+      'created_at_default' => :sort_by_created_at_asc,
       'created_at_desc' => :sort_by_created_at_desc,
       'end_time_asc' => :sort_by_end_time_asc,
+      'end_time_default' => :sort_by_end_time_asc,
       'end_time_desc' => :sort_by_end_time_desc
     }
 
@@ -17,7 +19,11 @@ class TasksController < ApplicationController
                   else
                     :all
                   end
-    @tasks = Task.send(sort_method)
+      @q = Task.ransack(params[:q])
+      binding.b
+      @tasks = @q.result(distinct: true)
+      @tasks = Task.send(sort_method)
+    # ransack_alias :title_state, :title_or_state
   end
 
   def show; end
