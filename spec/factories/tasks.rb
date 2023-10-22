@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :task do
-    title { Faker::Quote.famous_last_words  }
-    content { Faker::Quote.yoda }
+    title { Faker::TvShows::BigBangTheory.character }
+    content { Faker::TvShows::BigBangTheory.quote }
     end_time { DateTime.now + 1.year }
     :state
   end

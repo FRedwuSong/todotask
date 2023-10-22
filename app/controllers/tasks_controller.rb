@@ -19,11 +19,8 @@ class TasksController < ApplicationController
                   else
                     :all
                   end
-      @q = Task.ransack(params[:q])
-      binding.b
-      @tasks = @q.result(distinct: true)
-      @tasks = Task.send(sort_method)
-    # ransack_alias :title_state, :title_or_state
+    @q = Task.ransack(params[:q])
+    @tasks = @q.result(distinct: true) || Task.send(sort_method)
   end
 
   def show; end

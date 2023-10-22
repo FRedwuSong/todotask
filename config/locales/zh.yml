@@ -13,6 +13,7 @@ zh:
   sort_by_end_time_asc: "升冪"
   sort_by_end_time_desc: "降冪"
   sort_submit: "Submit"
+  search_submit: "搜尋"
   delete_confirm: "要確定喔！！！"
   forms:
     error: "錯誤"

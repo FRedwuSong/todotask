@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Examples:
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
@@ -6,4 +8,4 @@
 require 'factory_bot_rails'
 include FactoryBot::Syntax::Methods
 
-10.times{ FactoryBot.create(:task) }
+10.times { FactoryBot.create(:task) }

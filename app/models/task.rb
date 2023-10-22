@@ -29,6 +29,6 @@ class Task < ApplicationRecord
   validates :end_time, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title]
+    %w[content created_at end_time id state title updated_at]
   end
 end

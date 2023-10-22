@@ -13,6 +13,7 @@ en:
   sort_by_end_time_asc: "asc"
   sort_by_end_time_desc: "desc"
   sort_submit: "Submit"
+  search_submit: "Search"
   delete_confirm: "Are you sure you want to delete this task?"
   forms:
     error: "error"
