@@ -7,11 +7,14 @@ en:
   delete: "Delete Task"
   created_at: "created_at_sort"
   end_time: "end_time_sort"
+  priority: "priority"
   default: "default"
   sort_by_created_at_asc: "asc"
   sort_by_created_at_desc: "desc"
   sort_by_end_time_asc: "asc"
   sort_by_end_time_desc: "desc"
+  sort_by_priority_asc: "asc"
+  sort_by_priority_desc: "desc"
   sort_submit: "Submit"
   search_submit: "Search"
   delete_confirm: "Are you sure you want to delete this task?"
@@ -26,6 +29,7 @@ en:
         content: "Task's content"
         end_time: "Task's ending time"
         state: "state"
+        priority: "priority"
     errors:
       models:
         task:
@@ -50,3 +54,7 @@ en:
       pending: "pending"
       processing: "process"
       complete: "completed"
+  priority_options:
+    high: "high"
+    medium: "medium"
+    low: "low"

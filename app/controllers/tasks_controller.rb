@@ -9,18 +9,29 @@ class TasksController < ApplicationController
       'created_at_desc' => :sort_by_created_at_desc,
       'end_time_asc' => :sort_by_end_time_asc,
       'end_time_default' => :sort_by_end_time_asc,
-      'end_time_desc' => :sort_by_end_time_desc
+      'end_time_desc' => :sort_by_end_time_desc,
+      'priority_asc' => :sort_by_priority_asc,
+      'priority_default' => :sort_by_priority_asc,
+      'priority_desc' => :sort_by_priority_desc
     }
 
     sort_method = if params[:created_at]
                     sort_methods["created_at_#{params[:created_at]}"]
                   elsif params[:end_time]
                     sort_methods["end_time_#{params[:end_time]}"]
+                  elsif params[:priority]
+                    sort_methods["priority_#{params[:priority]}"]
                   else
                     :all
                   end
+
     @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true) || Task.send(sort_method)
+
+    @tasks = if params[:q]
+               @q.result(distinct: true)
+             else
+               Task.send(sort_method)
+             end
   end
 
   def show; end
@@ -63,7 +74,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :end_time, :state)
+    params.require(:task).permit(:title, :content, :end_time, :state, :priority)
   end
 
   def find_task

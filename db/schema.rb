@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_231_022_163_117) do
+ActiveRecord::Schema[7.0].define(version: 20_231_024_082_406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 20_231_022_163_117) do
     t.datetime 'updated_at', null: false
     t.datetime 'end_time'
     t.string 'state'
+    t.integer 'priority', default: 0
     t.index ['state'], name: 'index_tasks_on_state'
     t.index ['title'], name: 'index_tasks_on_title'
   end

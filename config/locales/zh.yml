@@ -7,12 +7,15 @@ zh:
   delete: "刪除任務"
   created_at: "依新增日期排序"
   end_time: "依任務結束時間排序"
+  priority: "優先順序"
   default: "預設值"
   sort_by_created_at_asc: "升冪"
   sort_by_created_at_desc: "降冪"
   sort_by_end_time_asc: "升冪"
   sort_by_end_time_desc: "降冪"
-  sort_submit: "Submit"
+  sort_by_priority_asc: "升冪"
+  sort_by_priority_desc: "降冪"
+  sort_submit: "排序"
   search_submit: "搜尋"
   delete_confirm: "要確定喔！！！"
   forms:
@@ -26,6 +29,7 @@ zh:
         content: "任務內容"
         end_time: "任務結束時間"
         state: "任務狀態"
+        priority: "優先順序"
     errors:
       models:
         task:
@@ -50,3 +54,7 @@ zh:
       pending: "待處理"
       processing: "進行中"
       complete: "完成"
+  priority_options:
+    high: "高"
+    medium: "中"
+    low: "低"
