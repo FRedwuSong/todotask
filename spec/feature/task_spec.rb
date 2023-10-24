@@ -183,6 +183,70 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
   end
 
+  describe 'searching task by title and state' do
+    let!(:tasks) do
+      tasks = []
+      # Create a new task with some attributes
+      searching_task = Task.create(
+        id: 1,
+        title: 'The Task be searching',
+        content: 'searching',
+        end_time: Time.now + 1.month,
+        state: 'pending',
+        created_at: Time.now,
+        updated_at: Time.now
+      )
+
+      # Add the task to the array
+      tasks << searching_task
+
+      # Create four more tasks using a factory
+      4.times do |_time|
+        tasks << create(:task)
+      end
+
+      # Return the tasks array
+      tasks
+    end
+
+    it "Use ransack to serch task's title" do
+      visit tasks_path
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[0].title}/
+        )
+      end
+      within('div.search') do
+        fill_in 'q_title_cont', with: tasks[0].title
+        click_on I18n.t('search_submit').to_s
+      end
+      within('div.tasks') do
+        expect(page).to have_content(
+          /Task's title : #{tasks[0].title}/
+        )
+      end
+    end
+
+    it "Use ransack to serch task's state" do
+      visit tasks_path
+      # binding.b
+      within('div.tasks') do
+        expect(page).to have_content(
+          /state : #{tasks[0].state}/
+        )
+      end
+      within('div.search') do
+        fill_in 'q_state_eq', with: 'pending'
+        click_on I18n.t('search_submit').to_s
+      end
+      within('div.tasks') do
+        expect(page).to have_content(
+          /state : #{tasks[0].state}/
+        )
+      end
+    end
+  end
+
   private
 
   def create_tasks(title, content, end_time)
