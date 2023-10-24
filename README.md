@@ -56,7 +56,7 @@ erDiagram
   PostgreSQL 14.9
 #### 伺服器建議使用以下平台（不限定）：
  - [ ] Heroku
- - [ ] Fly.io
+ - [X] Fly.io
  - [ ] AWS
  - [ ] GCP
 

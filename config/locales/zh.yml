@@ -13,28 +13,26 @@ zh:
   sort_by_end_time_asc: "升冪"
   sort_by_end_time_desc: "降冪"
   sort_submit: "Submit"
+  search_submit: "搜尋"
   delete_confirm: "要確定喔！！！"
   forms:
     error: "錯誤"
     prohibited_saved: "導致儲存失敗:"
     submit: "完成"
-
   activerecord:
     attributes:
       task:
         title: "任務標題"
         content: "任務內容"
         end_time: "任務結束時間"
+        state: "任務狀態"
     errors:
       models:
         task:
           attributes:
-            content:
-              blank: "任務內容需要填寫喔"
-            title:
-              blank: "任務標題需要填寫喔"
-            end_time:
-              blank: "任務結束時間要寫喔"
+            content: "任務內容需要填寫喔"
+            title: "任務標題需要填寫喔"
+            end_time: "任務結束時間要寫喔"
   controllers:
     tasks:
       create:
@@ -47,3 +45,8 @@ zh:
     submit:
       create: "建立任務"
       update: "編輯任務"
+  aasm:
+    states:
+      pending: "待處理"
+      processing: "進行中"
+      complete: "完成"
