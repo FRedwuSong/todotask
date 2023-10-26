@@ -25,5 +25,10 @@
     <%= form.datetime_field :end_time %>
   </div>
 
+  <div>
+    <%= form.label :priority %><br />
+    <%= form.select :priority, options_for_select(Task.priorities.keys.map {|p| [p.capitalize, p]}) %>
+  </div>
+
   <div><%= form.submit %></div>
 <% end %>

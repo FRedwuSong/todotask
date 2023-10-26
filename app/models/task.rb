@@ -23,10 +23,15 @@ class Task < ApplicationRecord
   scope :sort_by_created_at_desc, -> { order(created_at: :desc) }
   scope :sort_by_end_time_asc, -> { order(end_time: :asc) }
   scope :sort_by_end_time_desc, -> { order(end_time: :desc) }
+  scope :sort_by_priority_asc, -> { order(priority: :asc) }
+  scope :sort_by_priority_desc, -> { order(priority: :desc) }
 
   validates :title, presence: true
   validates :content, presence: true
   validates :end_time, presence: true
+
+  enum priority: %i[low medium high]
+  # {"low"=>0, "medium"=>1, "high"=>2}
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[content created_at end_time id state title updated_at]

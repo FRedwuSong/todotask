@@ -193,6 +193,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
         content: 'searching',
         end_time: Time.now + 1.month,
         state: 'pending',
+        priority: 2,
         created_at: Time.now,
         updated_at: Time.now
       )
@@ -229,7 +230,6 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
     it "Use ransack to serch task's state" do
       visit tasks_path
-      # binding.b
       within('div.tasks') do
         expect(page).to have_content(
           /state : #{tasks[0].state}/
@@ -243,6 +243,51 @@ RSpec.feature 'Task CRUD_', type: :feature do
         expect(page).to have_content(
           /state : #{tasks[0].state}/
         )
+      end
+    end
+
+    it "Use ransack to serch task's state" do
+      visit tasks_path
+      within('div.tasks') do
+        expect(page).to have_content(
+          /state : #{tasks[0].state}/
+        )
+      end
+      within('div.search') do
+        fill_in 'q_state_eq', with: 'pending'
+        click_on I18n.t('search_submit').to_s
+      end
+      within('div.tasks') do
+        expect(page).to have_content(
+          /state : #{tasks[0].state}/
+        )
+      end
+    end
+
+    it "Sort task by task's priority ASC" do
+      visit tasks_path
+
+      within('form.form_priority_sort_asc_desc') do
+        select I18n.t('sort_by_priority_asc').to_s, from: 'priority'
+        click_on I18n.t('sort_submit').to_s
+      end
+      within('.tasks') do
+        first_task = all('div').first
+        expect(first_task[:class]).not_to eq('task1')
+      end
+    end
+
+    it "Sort task by task's priority desc" do
+      visit tasks_path
+
+      within('form.form_priority_sort_asc_desc') do
+        select I18n.t('sort_by_priority_desc').to_s, from: 'priority'
+        click_on I18n.t('sort_submit').to_s
+      end
+
+      within('.tasks') do
+        first_task = all('div').first
+        expect(first_task[:class]).to eq('task1')
       end
     end
   end
