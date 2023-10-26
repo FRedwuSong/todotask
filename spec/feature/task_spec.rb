@@ -266,37 +266,28 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
     it "Sort task by task's priority ASC" do
       visit tasks_path
-      within('div.tasks') do
-        expect(page).to have_content(
-          /state : #{tasks[0].state}/
-        )
-      end
+
       within('form.form_priority_sort_asc_desc') do
         select I18n.t('sort_by_priority_asc').to_s, from: 'priority'
         click_on I18n.t('sort_submit').to_s
       end
-      within('div.tasks') do
-        expect(page).to have_content(
-          /state : #{tasks[0].state}/
-        )
+      within('.tasks') do
+        first_task = all('div').first
+        expect(first_task[:class]).not_to eq('task1')
       end
     end
 
     it "Sort task by task's priority desc" do
       visit tasks_path
-      within('div.tasks') do
-        expect(page).to have_content(
-          /state : #{tasks[0].state}/
-        )
-      end
+
       within('form.form_priority_sort_asc_desc') do
         select I18n.t('sort_by_priority_desc').to_s, from: 'priority'
         click_on I18n.t('sort_submit').to_s
       end
-      within('div.tasks') do
-        expect(page).to have_content(
-          /state : #{tasks[0].state}/
-        )
+
+      within('.tasks') do
+        first_task = all('div').first
+        expect(first_task[:class]).to eq('task1')
       end
     end
   end
