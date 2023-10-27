@@ -2,6 +2,7 @@
 
 class TasksController < ApplicationController
   before_action :find_task, only: %i[show edit update destroy]
+  include Pagy::Backend
   def index
     sort_methods = {
       'created_at_asc' => :sort_by_created_at_asc,
@@ -32,6 +33,8 @@ class TasksController < ApplicationController
              else
                Task.send(sort_method)
              end
+
+    @pagy, @tasks = pagy(@tasks, items: 10)
   end
 
   def show; end

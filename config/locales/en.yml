@@ -18,6 +18,13 @@ en:
   sort_submit: "Submit"
   search_submit: "Search"
   delete_confirm: "Are you sure you want to delete this task?"
+  pagination:
+    showing: "Showing"
+    results: "Results"
+    to: "TO"
+    of: "OF"
+
+
   forms:
     error: "error"
     prohibited_saved: "prohibited this content from being saved :"
