@@ -91,7 +91,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
       within('form.form_created_at_sort_asc_desc') do
@@ -100,7 +100,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
     end
@@ -116,7 +116,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
       within('form.form_created_at_sort_asc_desc') do
@@ -125,7 +125,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[4][:title]}/
+          /#{tasks[4][:title]}/
         )
       end
     end
@@ -143,7 +143,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
       within('form.form_end_time_sort_asc_desc') do
@@ -152,7 +152,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
     end
@@ -168,7 +168,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0][:title]}/
+          /#{tasks[0][:title]}/
         )
       end
       within('form.form_end_time_sort_asc_desc') do
@@ -177,7 +177,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[4][:title]}/
+          /#{tasks[4][:title]}/
         )
       end
     end
@@ -214,7 +214,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       visit tasks_path
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0].title}/
+          /#{tasks[0].title}/
         )
       end
       within('div.search') do
@@ -223,7 +223,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.tasks') do
         expect(page).to have_content(
-          /Task's title : #{tasks[0].title}/
+          /#{tasks[0].title}/
         )
       end
     end
@@ -287,7 +287,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
       within('.tasks') do
         first_task = all('div').first
-        expect(first_task[:class]).to eq('task1')
+        expect(first_task[:class]).to eq('task1 max-w-sm rounded overflow-hidden shadow-lg')
       end
     end
   end
