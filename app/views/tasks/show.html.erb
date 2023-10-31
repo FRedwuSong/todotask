@@ -1,6 +1,12 @@
-<h1><%= @task.title %></h1>
-<%= @task.content %>
-<%= @task.end_time %>
-
-<br />
-<%= link_to 'Task list', tasks_path %>
+<div class="p-6">
+  <div class="font-bold text-xl mb-2"><%= @task.title %></div>
+    <p><%= "#{t('activerecord.attributes.task.end_time')}" %> : <%=  @task.end_time.strftime("%d %b, %Y, %H:%M") %></p>
+    <p><%= "#{t('activerecord.attributes.task.state')}" %> : <%= I18n.t("aasm.states.#{ @task.state}") %></p>
+    <p><%= "#{t('activerecord.attributes.task.priority')}" %> : <%= I18n.t("priority_options.#{ @task.priority}") %></p><br />
+    <p class="text-gray-700 text-base"><%=  @task.content %></p>
+  </div>
+  <div class="p-6">
+    <%= link_to t('edit'), edit_task_path(locale: 'en', id:  @task.id),class: "middle none center rounded-lg bg-sky-600 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" %>
+    <%= link_to t('delete'), task_path(locale: 'en', id: @task.id), class: "middle none center rounded-lg bg-red-600 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none", data: {turbo_method: :delete, turbo_confirm: I18n.t("delete_confirm")}%>
+  </div>
+</div>

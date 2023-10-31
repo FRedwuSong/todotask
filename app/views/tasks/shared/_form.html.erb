@@ -10,24 +10,34 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :title %><br />
-    <%= form.text_field :title %>
+  <div class="mb-6">
+    <%= form.label :title,
+        class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.text_field :title,
+        class: 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
   </div>
 
-  <div>
-    <%= form.label :content %><br />
-    <%= form.text_field :content %>
+  <div class="mb-6">
+    <%= form.label :content,
+        class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.text_field :content,
+        class: 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
   </div>
 
-  <div>
-    <%= form.label :end_time %><br />
-    <%= form.datetime_field :end_time %>
+  <div class="mb-6">
+    <%= form.label :end_time,
+        class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.datetime_field :end_time,
+        class: 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
   </div>
 
-  <div>
-    <%= form.label :priority %><br />
-    <%= form.select :priority, options_for_select(Task.priorities.keys.map {|p| [p.capitalize, p]}) %>
+  <div class="mb-6">
+    <%= form.label :priority,
+        class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.select :priority,
+        options_for_select(Task.priorities.keys.map {|p| [p.capitalize, p]}),
+        {},
+        class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
   </div>
 
   <div><%= form.submit %></div>

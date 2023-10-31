@@ -1,10 +1,7 @@
 <div>
-  <h1><%= t('create') %></h1>
+  <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black"><%= t('create') %></h1>
 
   <section>
     <%= render 'tasks/shared/form', task: @task %>
-    <div>
-      <%= link_to t('list'), tasks_path %>
-    </div>
   </section>
 </div>
