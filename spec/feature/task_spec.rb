@@ -94,9 +94,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
           /#{tasks[0][:title]}/
         )
       end
-      within('form.form_created_at_sort_asc_desc') do
-        select I18n.t('sort_by_created_at_asc').to_s, from: 'created_at'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[2]/div/select') do
+        find(:xpath, 'option[2]').select_option
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -119,9 +119,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
           /#{tasks[0][:title]}/
         )
       end
-      within('form.form_created_at_sort_asc_desc') do
-        select I18n.t('sort_by_created_at_desc').to_s, from: 'created_at'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[2]/div/select') do
+        find(:xpath, 'option[3]').select_option
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -146,9 +146,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
           /#{tasks[0][:title]}/
         )
       end
-      within('form.form_end_time_sort_asc_desc') do
-        select I18n.t('sort_by_end_time_asc').to_s, from: 'end_time'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[1]/div/select') do
+        find(:xpath, 'option[2]').select_option
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -171,9 +171,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
           /#{tasks[0][:title]}/
         )
       end
-      within('form.form_end_time_sort_asc_desc') do
-        select I18n.t('sort_by_end_time_desc').to_s, from: 'end_time'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[1]/div/select') do
+        find(:xpath, 'option[3]').select_option
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -219,7 +219,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.search') do
         fill_in 'q_title_cont', with: tasks[0].title
-        click_on I18n.t('search_submit').to_s
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -237,7 +237,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.search') do
         fill_in 'q_state_eq', with: 'pending'
-        click_on I18n.t('search_submit').to_s
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -255,7 +255,7 @@ RSpec.feature 'Task CRUD_', type: :feature do
       end
       within('div.search') do
         fill_in 'q_state_eq', with: 'pending'
-        click_on I18n.t('search_submit').to_s
+        click
       end
       within('div.tasks') do
         expect(page).to have_content(
@@ -266,10 +266,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
     it "Sort task by task's priority ASC" do
       visit tasks_path
-
-      within('form.form_priority_sort_asc_desc') do
-        select I18n.t('sort_by_priority_asc').to_s, from: 'priority'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[3]/div/select') do
+        find(:xpath, 'option[2]').select_option
       end
       within('.tasks') do
         first_task = all('div').first
@@ -280,9 +278,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
     it "Sort task by task's priority desc" do
       visit tasks_path
 
-      within('form.form_priority_sort_asc_desc') do
-        select I18n.t('sort_by_priority_desc').to_s, from: 'priority'
-        click_on I18n.t('sort_submit').to_s
+      within(:xpath, '/html/body/main/div[2]/section/div[1]/form[3]/div/select') do
+        find(:xpath, 'option[3]').select_option
+        click
       end
 
       within('.tasks') do

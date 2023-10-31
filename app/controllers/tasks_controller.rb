@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     @tasks = if params[:q]
                @q.result(distinct: true)
              else
-               Task.send(sort_method)
+               Task.send(sort_method || :all)
              end
 
     @pagy, @tasks = pagy(@tasks, items: 5)
