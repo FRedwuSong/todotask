@@ -17,6 +17,7 @@ zh:
   sort_by_priority_desc: "降冪"
   sort_submit: "排序"
   search_submit: "搜尋"
+  language: "語言"
   delete_confirm: "要確定喔！！！"
   pagination:
     showing: "顯示"
@@ -34,7 +35,7 @@ zh:
         content: "任務內容"
         end_time: "任務結束時間"
         state: "任務狀態"
-        priority: "優先順序"
+        priority: "任務優先順序"
     errors:
       models:
         task:

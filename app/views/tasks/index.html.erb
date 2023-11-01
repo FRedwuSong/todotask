@@ -1,50 +1,87 @@
-<div>
-  <h1><%= t('list') %></h1>
+<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black"><%= t('list') %>
+    <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400"><%= link_to t('create'), new_task_path %>
+  </small></h1>
   <section>
-    <p><%= link_to t('create'), new_task_path %></p><br />
     <div class="tasks_content">
       <% ["created_at", "end_time", "priority"].each do |field| %>
-        <%= form_tag({ controller: "tasks", action: "index" }, method: "get", class: "form_#{field}_sort_asc_desc") do |form| %>
-          <label for="<%= field %>"><%= t(field) %></label>
-          <select name="<%= field %>" id="<%= field %>">
-            <option value="default"><%= t('default') %></option>
-            <option value="asc"><%= t("sort_by_#{field}_asc") %></option>
-            <option value="desc"><%= t("sort_by_#{field}_desc") %></option>
-          </select>
-        <%= submit_tag t('sort_submit') %>
-        <% end %>
+      <%= form_with(url: { controller: "tasks", action: "index" }, method: "get", html: { class: "flex" }) do |form| %>
+        <div class="relative w-full">
+          <%= label_tag field, t(field), class: "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white" %>
+          <%= select_tag field,
+              options_for_select([[t("#{field}"), t("#{field}")],
+                                 [t("sort_by_#{field}_asc"), t("sort_by_#{field}_asc")],
+                                 [t("sort_by_#{field}_desc"), t("sort_by_#{field}_desc")]]),
+              id: "#{field}",
+              class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
+          <%= button_tag type: 'submit',
+              class: 'absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %>
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5m0 6 4 4 4-4"/>
+            </svg>
+            <span class="sr-only"><%= t('sort_submit') %></span>
       <% end %>
-      <div class="search">
-        <%= search_form_for @q do |f| %>
-        <!-- Search if the task's title -->
-          <%= f.label :title%>
-          <%= f.search_field :title_cont %>
-        <!-- Search if the task's state -->
-          <%= f.label :state%>
-          <%= f.search_field :state_eq %>
+      </div>
+      <% end %>
+      <% end %>
 
-          <%= submit_tag t('search_submit') %>
+      <div class="search items-center">
+        <%= search_form_for @q, class: "relative w-full" do |f| %>
+        <!-- Search if the task's title -->
+          <%= f.label :title, class: "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"%>
+          <%= f.search_field :title_cont, class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
+          placeholder: "#{t('search_submit')} #{t('title')}" %>
+
+          <%= button_tag type: 'submit',
+          class: 'absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %>
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+          <span class="sr-only"><%= t('search_submit') %></span>
+          <% end %>
         <% end %>
+        <!-- Search if the task's state -->
+        <%= search_form_for @q, class: "relative w-full" do |f| %>
+          <%= f.label :state, class: "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"%>
+          <%= f.search_field :state_eq, class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
+          placeholder: "#{t('search_submit')} #{t('activerecord.attributes.task.state')}" %>
+
+          <%= button_tag type: 'submit',
+              class: 'absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %>
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+            <span class="sr-only"><%= t('search_submit') %></span>
+           <% end %>
+        <% end %>
+
       </div>
       <br />
       <div class="tasks">
         <% @tasks.each do |task| %>
-        <div class="task<%= task.id %>">
-          <p><%= "#{t('title')}" %> : <%= task.title %></p><br />
-          <p><%= "#{t('content')}" %> : <%= task.content %></p><br />
-          <p><%= "#{t('activerecord.attributes.task.end_time')}" %> : <%= task.end_time.strftime("%d %b, %Y, %H:%M") %></p><br />
-          <p><%= "#{t('activerecord.attributes.task.state')}" %> : <%= I18n.t("aasm.states.#{task.state}") %></p><br />
-          <p><%= "#{t('activerecord.attributes.task.priority')}" %> : <%= I18n.t("priority_options.#{task.priority}") %></p><br />
-          <div>
-            <%= link_to t('edit'), edit_task_path(locale: 'en', id: task.id) %>
-            <%= link_to t('delete'), task_path(locale: 'en', id:task.id), data: {turbo_method: :delete, turbo_confirm: I18n.t("delete_confirm")}%>
+        <div class="task<%= task.id %> max-w-sm rounded overflow-hidden shadow-lg">
+          <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
+          <div class="p-6">
+            <div class="font-bold text-xl mb-2"><%= task.title %></div>
+            <p><%= "#{t('activerecord.attributes.task.end_time')}" %> : <%= task.end_time.strftime("%d %b, %Y, %H:%M") %></p>
+            <p><%= "#{t('activerecord.attributes.task.state')}" %> : <%= I18n.t("aasm.states.#{task.state}") %></p>
+            <% if task.priority == "high" %>
+              <p><%= "#{t('activerecord.attributes.task.priority')}" %> :
+                  <%= link_to t("priority_options.#{task.priority}"),
+                      task_path(task),
+                      class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'%></p><br />
+            <% else %>
+              <p><%= "#{t('activerecord.attributes.task.priority')}" %> : <%= I18n.t("priority_options.#{task.priority}") %></p><br />
+            <% end %>
+            <p class="text-gray-700 text-base"><%= task.content %></p>
+          </div>
+          <div class="p-6">
+            <%= link_to t('edit'), edit_task_path(locale: 'en', id: task.id),class: "middle none center rounded-lg bg-sky-600 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" %>
+            <%= link_to t('delete'), task_path(locale: 'en', id:task.id), class: "middle none center rounded-lg bg-red-600 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none", data: {turbo_method: :delete, turbo_confirm: I18n.t("delete_confirm")}%>
           </div>
           <br />
         </div>
         <% end %>
       </div>
     </div>
-    <!-- <%= pagy_nav(@pagy) if @pagy.pages > 1 %> -->
     <%= render partial: 'tasks/shared/pagination', locals: { records: @tasks, pagy: @pagy } %>
   </section>
-</div>

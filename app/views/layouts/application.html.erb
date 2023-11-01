@@ -12,17 +12,16 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <div class="flash_msg">
+    <main class="container mx-auto mt-28 px-5">
+      <%= render "layouts/shared/nav" %>
+      <div class="flash_msg flex-auto">
         <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: "alert alert-info" %>
         <% end %>
       </div>
       <div>
-        <%= link_to "繁體中文", :controller => controller_name, :action => action_name, :locale => "zh" %><br/>
-        <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+        <%= yield %>
       </div>
-      <%= yield %>
 
     </main>
   </body>
