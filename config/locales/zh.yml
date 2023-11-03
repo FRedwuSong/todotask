@@ -36,6 +36,10 @@ zh:
         end_time: "任務結束時間"
         state: "任務狀態"
         priority: "任務優先順序"
+      user: "任務之使用者"
+      user:
+        email: "Email"
+        name: "使用者名"
     errors:
       models:
         task:
