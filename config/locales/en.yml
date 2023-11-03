@@ -36,6 +36,10 @@ en:
         end_time: "Task's ending time"
         state: "Task's state"
         priority: "Task's priority"
+        user: "Task's User"
+      user:
+        email: "email"
+        name: "name"
     errors:
       models:
         task:

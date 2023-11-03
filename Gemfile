@@ -85,3 +85,5 @@ gem 'aasm', '~> 5.2'
 gem 'ransack', '~> 4.0'
 
 gem 'pagy', '~> 6.1'
+
+gem 'bcrypt'
