@@ -2,6 +2,7 @@
 
 class TasksController < ApplicationController
   before_action :find_task, only: %i[show edit update destroy]
+  before_action :logged_in_user
   include Pagy::Backend
   def index
     sort_methods = {
@@ -31,7 +32,7 @@ class TasksController < ApplicationController
     @tasks = if params[:q]
                @q.result(distinct: true)
              else
-               Task.send(sort_method || :all)
+              @current_user.tasks.send(sort_method || :all)
              end
 
     @pagy, @tasks = pagy(@tasks, items: 5)
