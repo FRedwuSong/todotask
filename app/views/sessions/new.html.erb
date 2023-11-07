@@ -1,17 +1,21 @@
-<h1 class='text-center'>Log in</h1>
-
-<div class="row">
+<section>
   <div class="col-md-6 offset-3">
     <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+      <div class="mb-6">
+        <%= f.label t("session.email"),
+            class: 'block mb-2 text-sm font-medium text-gray-900'%>
+        <%= f.email_field :email,
+            class: 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+      </div>
 
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+      <div class="mb-6">
+        <%= f.label t("session.password"),
+            class: 'block mb-2 text-sm font-medium text-gray-900'%>
+        <%= f.password_field :password,
+            class: 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.submit "Log in" %>
+      <div><%= f.submit t('session.login') %></div>
     <% end %>
-
   </div>
-</div>
+</section>

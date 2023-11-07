@@ -33,12 +33,12 @@
         <li>
           <% if logged_in? %>
             <ul>
-              <li><%= link_to "Log out", logout_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover", data: { turbo_method: :delete } %></li>
+              <li><%= link_to "#{t('log_out')}", logout_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover", data: { turbo_method: :delete } %></li>
             </ul>
           <% else %>
             <ul>
-              <li><%= link_to "Log in", login_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover" %></li>
-              <li><%= link_to "Sign up", signup_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover" %></li>
+              <li><%= link_to "#{t('log_in')}", login_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover" %></li>
+              <li><%= link_to "#{t('sign_up')}", signup_path, class: "flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover" %></li>
             </ul>
           <% end %>
         </li>
