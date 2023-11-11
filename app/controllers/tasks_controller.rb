@@ -46,6 +46,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
 
     respond_to do |format|
       if @task.save
@@ -78,7 +79,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :end_time, :state, :priority)
+    params.require(:task).permit(:title, :content, :end_time, :state)
   end
 
   def find_task
