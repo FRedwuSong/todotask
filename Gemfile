@@ -61,6 +61,7 @@ group :development, :test do
   gem 'faker', '~> 3.2', '>= 3.2.1'
   gem 'guard-rspec'
   gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.2'
 end
 
 group :development do

@@ -6,16 +6,24 @@ RSpec.feature 'Task CRUD_', type: :feature do
   let(:title) { 'TaskTitle' }
   let(:content) { "Task's content" }
   let(:end_time) { Time.now + 1.month }
+  before :all do
+    DatabaseCleaner.start
+    @user = create(:user)
+  end
 
   describe '任務的列表' do
     it 'visit root path' do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
+      # find(:xpath, '/html/body/main/nav/div/div/ul/li[1]/a').click
       expect(page).to have_selector('h1', text: I18n.t('list').to_s)
     end
   end
 
   describe '新增任務' do
     it 'success create task' do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       expect(page).to have_content(I18n.t('controllers.tasks.create.notice').to_s)
       expect(page).to have_content(title)
@@ -23,6 +31,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it 'unsuccess create task because do not input title and content' do
+      visit root_path
+      user_log_in(@user)
       create_tasks('', '', '')
       expect(page).to have_content('3 errors prohibited this content from being saved :')
       expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.content').to_s)
@@ -31,12 +41,16 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it 'unsuccess create task because do not input title' do
+      visit root_path
+      user_log_in(@user)
       create_tasks('', content, end_time)
       expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.title').to_s)
       expect(page).to have_content(content)
     end
 
     it 'unsuccess create task because do not input content' do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, '', end_time)
       expect(page).to have_content(I18n.t('activerecord.errors.models.task.attributes.content').to_s)
     end
@@ -44,6 +58,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
   describe '檢視任務' do
     it 'show the task' do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       visit tasks_path
       expect(Task.all == 1)
@@ -52,18 +68,24 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
   describe '修改任務' do
     it 'edit and update task and content' do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       edit_tasks(title, content, end_time)
       expect(page).to have_content('Task was successfully edied')
     end
 
     it "Only edit the task's titile, and content is empty" do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       edit_tasks(title, '', end_time)
       expect(page).to have_content('1 error prohibited this content from being saved :')
     end
 
     it "Only update the task's content, and title is empty" do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       edit_tasks('', content, end_time)
       expect(page).to have_content('1 error prohibited this content from being saved :')
@@ -73,6 +95,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
   describe '刪除任務' do
     it 'Destory a task' do
+      visit root_path
+      user_log_in(@user)
       create_tasks(title, content, end_time)
       click_on 'Delete'
       expect(page).to have_content('Task deleted successfully')
@@ -87,7 +111,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
         tasks << task
       end
 
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
 
       within('div.tasks') do
         expect(page).to have_content(
@@ -112,7 +137,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
         tasks << task
       end
 
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
 
       within('div.tasks') do
         expect(page).to have_content(
@@ -139,7 +165,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
         tasks << task
       end
 
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
 
       within('div.tasks') do
         expect(page).to have_content(
@@ -164,7 +191,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
         tasks << task
       end
 
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
 
       within('div.tasks') do
         expect(page).to have_content(
@@ -195,7 +223,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
         state: 'pending',
         priority: 2,
         created_at: Time.now,
-        updated_at: Time.now
+        updated_at: Time.now,
+        user_id: @user.id
       )
 
       # Add the task to the array
@@ -211,7 +240,9 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it "Use ransack to serch task's title" do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
+
       within('div.tasks') do
         expect(page).to have_content(
           /#{tasks[0].title}/
@@ -229,7 +260,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it "Use ransack to serch task's state" do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
       within('div.tasks') do
         expect(page).to have_content(
           /state : #{tasks[0].state}/
@@ -247,7 +279,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it "Use ransack to serch task's state" do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
       within('div.tasks') do
         expect(page).to have_content(
           /state : #{tasks[0].state}/
@@ -265,7 +298,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it "Sort task by task's priority ASC" do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
       within(:xpath, '/html/body/main/div[2]/section/div[1]/form[3]/div/select') do
         find(:xpath, 'option[2]').select_option
       end
@@ -276,7 +310,8 @@ RSpec.feature 'Task CRUD_', type: :feature do
     end
 
     it "Sort task by task's priority desc" do
-      visit tasks_path
+      visit root_path
+      user_log_in(@user)
 
       within(:xpath, '/html/body/main/div[2]/section/div[1]/form[3]/div/select') do
         find(:xpath, 'option[3]').select_option
@@ -292,6 +327,13 @@ RSpec.feature 'Task CRUD_', type: :feature do
 
   private
 
+  def user_log_in(user)
+    visit root_path
+    fill_in 'session_email', with: user.email
+    fill_in 'session_password', with: user.password
+    click_on 'commit'
+    find(:xpath, '/html/body/main/nav/div/div/ul/li[1]/a').click
+  end
   def create_tasks(title, content, end_time)
     visit tasks_path
     click_link I18n.t('create').to_s
