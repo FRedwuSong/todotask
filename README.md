@@ -61,4 +61,5 @@ erDiagram
  - [ ] GCP
 #### 專案連結
 https://todotask.fly.dev/
-
+* EMAIL ： test1@titask.com
+* PASSWORD ： 1234asdf
