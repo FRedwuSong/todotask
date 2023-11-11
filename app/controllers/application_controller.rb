@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include SessionsHelper
   around_action :switch_locale
   before_action :set_locale
 
@@ -18,5 +19,14 @@ class ApplicationController < ActionController::Base
     session[:locale] = params[:locale] if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
 
     I18n.locale = session[:locale] || I18n.default_locale
+  end
+
+  private
+  def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
   end
 end

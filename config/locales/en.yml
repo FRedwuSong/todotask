@@ -19,6 +19,13 @@ en:
   search_submit: "Search"
   language: "language"
   delete_confirm: "Are you sure you want to delete this task?"
+  log_in: "Log in"
+  log_out: "Log out"
+  sign_up: "Sign up"
+  session:
+    login: "login"
+    email: "email"
+    password: "password"
   pagination:
     showing: "Showing"
     results: "Results"
@@ -38,8 +45,11 @@ en:
         priority: "Task's priority"
         user: "Task's User"
       user:
-        email: "email"
-        name: "name"
+        email: "Email"
+        name: "Name"
+        password: "password"
+        password_confirmation: "Confirmation"
+        create_my_account: "Create my account"
     errors:
       models:
         task:
